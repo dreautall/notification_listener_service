@@ -47,24 +47,24 @@ public class NotificationListenerService
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        String appPackageName = getApplicationContext().getPackageName();
-        String notificationPackageName = sbn.getPackageName();
-        if (notificationPackageName.contains(appPackageName)) {
+        //String appPackageName = getApplicationContext().getPackageName();
+        //String notificationPackageName = sbn.getPackageName();
+        //if (notificationPackageName.contains(appPackageName)) {
             String log = "On Notification Posted";
             String NOTIFICATION_POSTED_METHOD = "OnNotificationDisplay";
             onNotificationStateChange(sbn, log, NOTIFICATION_POSTED_METHOD);
-        }
+        //}
     }
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
-        String appPackageName = getApplicationContext().getPackageName();
-        String notificationPackageName = sbn.getPackageName();
-        if (notificationPackageName.contains(appPackageName)) {
+        //String appPackageName = getApplicationContext().getPackageName();
+        //String notificationPackageName = sbn.getPackageName();
+        //if (notificationPackageName.contains(appPackageName)) {
             String log = "On Notification Removed";
             String NOTIFICATION_REMOVED_METHOD = "OnNotificationRemove";
             onNotificationStateChange(sbn, log, NOTIFICATION_REMOVED_METHOD);
-        }
+        //}
     }
 
     private void onNotificationStateChange(

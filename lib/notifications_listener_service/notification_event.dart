@@ -4,6 +4,8 @@ const String _notificationKey = "NOTIFICATION_KEY";
 const String _notificationTag = "NOTIFICATION_TAG";
 const String _notificationPackageName = "NOTIFICATION_PACKAGE_NAME";
 const String _notificationState = "NOTIFICATION_STATE";
+const String _notificationTitle = "NOTIFICATION_TITLE";
+const String _notificationText = "NOTIFICATION_TEXT";
 
 enum NotificationState {
   post,
@@ -18,6 +20,8 @@ class NotificationEvent {
   String? createdAt;
   String? packageName;
   NotificationState? state;
+  String? title;
+  String? text;
 
   NotificationEvent({
     this.id,
@@ -27,6 +31,8 @@ class NotificationEvent {
     this.createdAt,
     this.packageName,
     this.state,
+    this.title,
+    this.text,
   });
 
   static NotificationState? _fetchNotificationState(dynamic state) {
@@ -51,6 +57,8 @@ class NotificationEvent {
       key: map[_notificationKey],
       tag: map[_notificationTag],
       state: _fetchNotificationState(map[_notificationState]),
+      title: map[_notificationTitle],
+      text: map[_notificationText],
     );
     return evt;
   }
@@ -68,6 +76,8 @@ class NotificationEvent {
         "\ntag = $tag"
         "\ncreated_at = $createdAt"
         "\npackage_name = $packageName"
-        "\nnotification_state = $state.";
+        "\nnotification_state = $state"
+        "\ntitle = $title"
+        "\ntext = $text";
   }
 }
