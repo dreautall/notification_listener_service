@@ -6,9 +6,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodChannel;
 import kh.ad.notifications_listener_service.utils.NotificationServiceMethodCallHandler;
+import kh.ad.notifications_listener_service.utils.NotificationServiceFlutterEngineUtils;
 
 /**
  * NotificationsListenerServicePlugin
@@ -21,12 +23,19 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        Log.i(TAG, "On Attached To Engine Start");
+        FlutterEngine engine;
+        engine = flutterPluginBinding.getFlutterEngine();
+        NotificationServiceFlutterEngineUtils.storeEngine(engine);
+        
         Context mContext = flutterPluginBinding.getApplicationContext();
         String FOREGROUND_METHOD = "notifications_listener_service/RUN_NATIVE_FOREGROUND_METHOD";
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), FOREGROUND_METHOD);
-        handler = new NotificationServiceMethodCallHandler(mContext, TAG);
-        channel.setMethodCallHandler(handler);
-        Log.i(TAG, "On Attached To Engine");
+        if(channel == null) {
+            channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), FOREGROUND_METHOD);
+            handler = new NotificationServiceMethodCallHandler(mContext, TAG);
+            channel.setMethodCallHandler(handler);
+        }
+        Log.i(TAG, "On Attached To Engine End");
     }
 
     @Override

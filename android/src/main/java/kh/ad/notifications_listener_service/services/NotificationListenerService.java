@@ -27,7 +27,6 @@ public class NotificationListenerService
         super.onCreate();
         initService();
         Log.i(TAG, "On Service Created");
-
     }
 
     private void initService() {
@@ -37,12 +36,16 @@ public class NotificationListenerService
     }
 
     private void initChannel() {
-        FlutterEngine engine = NotificationServiceFlutterEngineUtils.updateEngine(mContext);
+        Log.i(TAG, "initChannel Start");
+        FlutterEngine engine = NotificationServiceFlutterEngineUtils.getEngine(mContext);
         String RUN_DART_CHANNEL_NAME = "notifications_listener_service/RUN_DART_BACKGROUND_METHOD";
-        onNotificationChannel = new MethodChannel(
-                engine.getDartExecutor().getBinaryMessenger(),
-                RUN_DART_CHANNEL_NAME
-        );
+        if (onNotificationChannel == null) {
+            onNotificationChannel = new MethodChannel(
+                    engine.getDartExecutor().getBinaryMessenger(),
+                    RUN_DART_CHANNEL_NAME
+            );
+        }
+        Log.i(TAG, "initChannel End");
     }
 
     @Override

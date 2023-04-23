@@ -12,6 +12,7 @@ import java.util.List;
 import kh.ad.notifications_listener_service.services.NotificationListenerService;
 
 public class NotificationServiceUtils {
+    @SuppressWarnings("deprecation")
     public static boolean isServiceRunning(Context context) {
         final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         final List<ActivityManager.RunningServiceInfo> services = activityManager.getRunningServices(Integer.MAX_VALUE);
