@@ -53,7 +53,7 @@ public class NotificationServiceMethodCallHandler implements MethodChannel.Metho
             case "registerNotificationCallback":
                 try {
                     if (call.arguments != null) {
-                        long callback = (long) call.arguments;
+                        long callback = Long.parseLong(call.arguments.toString());
                         SharedPreferencesUtils.getInstance(mContext).saveNotificationCallback(callback);
                         result.success(true);
                     } else {
