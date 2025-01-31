@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.embedding.engine.FlutterJNI;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodChannel;
 import kh.ad.notifications_listener_service.utils.NotificationServiceMethodCallHandler;
@@ -20,6 +21,7 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
     private MethodChannel channel;
     private NotificationServiceMethodCallHandler handler;
     private final String TAG = "NotificationsListenerServicePlugin";
+    private FlutterJNI flutterJNI = new FlutterJNI(); 
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -35,6 +37,9 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
             handler = new NotificationServiceMethodCallHandler(mContext, TAG);
             channel.setMethodCallHandler(handler);
         }
+
+        flutterJNI.attachToNative();
+
         Log.i(TAG, "On Attached To Engine End");
     }
 
@@ -43,6 +48,7 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
         channel.setMethodCallHandler(null);
         channel = null;
         handler = null;
+        flutterJNI.detachFromNativeAndReleaseResources();
         Log.i(TAG, "On Detached From Engine");
     }
 }
