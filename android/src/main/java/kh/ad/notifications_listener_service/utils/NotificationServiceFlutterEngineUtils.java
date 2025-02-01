@@ -54,9 +54,16 @@ public class NotificationServiceFlutterEngineUtils {
         }
 
         Log.i(TAG, "flutter engine cache is null, create a new one");
+
+        return newEngine(context);
+    }
+
+    public static FlutterEngine newEngine(@NonNull Context context) {
+        Log.i(TAG, "newEngine()");
+        FlutterEngine engine;
+
         engine = new FlutterEngine(context);
         engine = updateEngine(context, engine);
-
         storeEngine(engine);
 
         return engine;

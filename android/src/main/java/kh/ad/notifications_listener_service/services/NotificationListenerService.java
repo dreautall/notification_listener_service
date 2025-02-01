@@ -37,7 +37,7 @@ public class NotificationListenerService
 
     private void initChannel() {
         Log.i(TAG, "initChannel Start");
-        FlutterEngine engine = NotificationServiceFlutterEngineUtils.getEngine(mContext);
+        FlutterEngine engine = NotificationServiceFlutterEngineUtils.newEngine(mContext);
         String RUN_DART_CHANNEL_NAME = "notifications_listener_service/RUN_DART_BACKGROUND_METHOD";
         if (onNotificationChannel == null) {
             onNotificationChannel = new MethodChannel(
