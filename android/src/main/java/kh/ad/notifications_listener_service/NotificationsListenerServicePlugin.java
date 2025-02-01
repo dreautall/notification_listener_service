@@ -34,7 +34,7 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
             channel.setMethodCallHandler(handler);
         }
 
-        Log.i(TAG, "Attaching FlutterJNI to native")
+        Log.i(TAG, "Attaching FlutterJNI to native");
         flutterJNI.attachToNative();
 
         FlutterEngine engine;
@@ -51,7 +51,7 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
             channel = null;
             handler = null;
         }
-        Log.i(TAG, "Detaching FlutterJNI from native")
+        Log.i(TAG, "Detaching FlutterJNI from native");
         flutterJNI.detachFromNativeAndReleaseResources();
         Log.i(TAG, "On Detached From Engine");
     }
