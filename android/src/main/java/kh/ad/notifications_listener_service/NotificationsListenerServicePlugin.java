@@ -26,10 +26,6 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         Log.i(TAG, "On Attached To Engine Start");
-        FlutterEngine engine;
-        engine = flutterPluginBinding.getFlutterEngine();
-        NotificationServiceFlutterEngineUtils.storeEngine(engine);
-        
         Context mContext = flutterPluginBinding.getApplicationContext();
         String FOREGROUND_METHOD = "notifications_listener_service/RUN_NATIVE_FOREGROUND_METHOD";
         if(channel == null) {
@@ -38,16 +34,24 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
             channel.setMethodCallHandler(handler);
         }
 
+        Log.i(TAG, "Attaching FlutterJNI to native")
         flutterJNI.attachToNative();
+
+        FlutterEngine engine;
+        engine = flutterPluginBinding.getFlutterEngine();
+        NotificationServiceFlutterEngineUtils.storeEngine(engine);
 
         Log.i(TAG, "On Attached To Engine End");
     }
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-        channel.setMethodCallHandler(null);
-        channel = null;
-        handler = null;
+        if(channel != null) {
+            channel.setMethodCallHandler(null);
+            channel = null;
+            handler = null;
+        }
+        Log.i(TAG, "Detaching FlutterJNI from native")
         flutterJNI.detachFromNativeAndReleaseResources();
         Log.i(TAG, "On Detached From Engine");
     }

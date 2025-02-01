@@ -18,6 +18,7 @@ public class NotificationServiceFlutterEngineUtils {
     private static final String FLUTTER_ENGINE_CACHE_KEY = "flutter_engine_main";
 
     public static FlutterEngine updateEngine(@NonNull Context context, @NonNull FlutterEngine engine) {
+        Log.i(TAG, "updateEngine()");
         Long callback = SharedPreferencesUtils.getInstance(context).getNotificationCallback();
         if (callback != null) {
             FlutterCallbackInformation callbackInformation =
