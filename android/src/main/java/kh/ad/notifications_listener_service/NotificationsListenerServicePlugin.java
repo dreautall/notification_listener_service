@@ -17,12 +17,11 @@ import kh.ad.notifications_listener_service.utils.NotificationServiceFlutterEngi
  * NotificationsListenerServicePlugin
  */
 @SuppressLint("LongLogTag")
-public class NotificationsListenerServicePlugin implements FlutterPlugin, ActivityAware, MethodCallHandler, PluginRegistry.ActivityResultListener, EventChannel.StreamHandler {
+public class NotificationsListenerServicePlugin implements FlutterPlugin {
     private MethodChannel channel;
     private NotificationServiceMethodCallHandler handler;
     private final String TAG = "NotificationsListenerServicePlugin";
     private FlutterJNI flutterJNI = new FlutterJNI(); 
-    private Activity mActivity;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -51,31 +50,5 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin, Activi
         handler = null;
         flutterJNI.detachFromNativeAndReleaseResources();
         Log.i(TAG, "On Detached From Engine");
-    }
-
-    @Override
-    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
-        this.mActivity = binding.getActivity();
-        binding.addActivityResultListener(this);
-    }
-
-    @Override
-    public void onDetachedFromActivityForConfigChanges() {
-        onDetachedFromActivity();
-    }
-
-    @Override
-    public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
-        onAttachedToActivity(binding);
-    }
-
-    @Override
-    public void onDetachedFromActivity() {
-        this.mActivity = null;
-    }
-
-    @Override
-    public void onListen(Object arguments, EventChannel.EventSink events) {
-        Log.i(TAG, "!!! LISTENED !!!");
     }
 }
