@@ -6,12 +6,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.FlutterJNI;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodChannel;
 import kh.ad.notifications_listener_service.utils.NotificationServiceMethodCallHandler;
-import kh.ad.notifications_listener_service.utils.NotificationServiceFlutterEngineUtils;
 
 /**
  * NotificationsListenerServicePlugin
@@ -36,10 +34,6 @@ public class NotificationsListenerServicePlugin implements FlutterPlugin {
 
         Log.i(TAG, "Attaching FlutterJNI to native");
         flutterJNI.attachToNative();
-
-        FlutterEngine engine;
-        engine = flutterPluginBinding.getFlutterEngine();
-        NotificationServiceFlutterEngineUtils.storeEngine(engine);
 
         Log.i(TAG, "On Attached To Engine End");
     }
