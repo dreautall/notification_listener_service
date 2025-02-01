@@ -22,6 +22,7 @@ public class NotificationServiceMethodCallHandler implements MethodChannel.Metho
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
+        Log.i(TAG, "Got Call " + call.method);
         switch (call.method) {
             case "isNotificationPermissionGranted":
                 try {
