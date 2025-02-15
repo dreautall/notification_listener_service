@@ -23,6 +23,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 31
+    namespace 'io.flutter.plugins.notification_listener_service'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
